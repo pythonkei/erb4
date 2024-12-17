@@ -19,12 +19,13 @@ Including another URLconf
 # then to pages/urls.py for sub routing and sub categorize (line 26)
 
 
-from django.contrib import admin
-from django.urls import path,include
+# Project demo added:
+from django.contrib import admin # Project demo new added:
+from django.urls import path,include # Project demo new added:
 
 urlpatterns = [
-   path('', include ('pages.urls')), 
+   path('', include ('pages.urls')), # Project demo added:
    # Serve end user 95% traffic first, '': Empty string for path categorize -> urls.py to pages folder
-   path('admin/', admin.site.urls)
+   path('admin/', admin.site.urls) # Project demo added:
 ]
 

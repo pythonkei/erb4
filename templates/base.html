@@ -1,0 +1,51 @@
+<!--This is project demo new added as Master structure html-->
+{% load static %}
+<!-- Load function static variable form settings.py, MUST be load into this html for call css and js -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!--This is addon top css, Static path location from setting.py to merge all following css file -->
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href={% static "css/all.css" %} />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href={% static "css/bootstrap.css" %}/>
+
+    <!-- Custom -->
+    <link rel="stylesheet" href={% static "css/style.css" %}/>
+
+    <!-- Lightbox -->
+    <link rel="stylesheet" href={% static "css/lightbox.min.css" %}/>
+
+    <title>BC Real Estate</title>
+  </head>
+
+
+  <body>
+    {% include 'pages_component/_topbar.html'%}
+    <!-- Specific topbar use for content html embed -->
+
+    {% include 'pages_component/_navbar.html'%}
+    <!-- Specific navbar use for content html embed -->
+
+    {% block content %} <!-- html content input -->{% endblock %}
+    <!-- Specific Master structure function for content html, use extends base html file call function -->
+
+    {% include 'pages_component/_footer.html'%}
+    <!-- Specific footer use for content html embed -->
+    
+
+
+    <!--This is addon top js,  Static path location from setting.py to merge all following js file -->
+    <script src={% static "js/jquery-3.3.1.min.js" %}></script>
+    <script src={% static "js/bootstrap.bundle.min.js" %}></script>
+    <script src={% static "js/main.js" %}></script>
+    <script src={% static "js/lightbox.min.js" %}></script>
+  </body>
+</html>
