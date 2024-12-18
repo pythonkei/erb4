@@ -23,9 +23,10 @@ Including another URLconf
 from django.contrib import admin # Project demo new added:
 from django.urls import path,include # Project demo new added:
 
+# Endpoint Define
 urlpatterns = [
-   path('', include ('pages.urls')), # Project demo added:
+   path('', include ('pages.urls')), # this line is project added
    # Serve end user 95% traffic first, '': Empty string for path categorize -> urls.py to pages folder
-   path('admin/', admin.site.urls) # Project demo added:
+   path('admin/', admin.site.urls) #  Path endpoint as 'admin/' this line is project added
 ]
 
