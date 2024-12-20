@@ -1,0 +1,16 @@
+<!-- Modify django CMS admin UI-->
+{% extends 'admin/base.html' %}
+{% load static %}
+{% block branding %}
+<h1 id='head'>
+    <img src="{% static 'img/logo.png' %}"
+    alt="BC Real Estate"
+    class="brand_img"
+    height=''
+    width='80'> BC Real Estate CMS
+</h1>
+{% endblock %}
+<!-- New cascade css on top -->
+{% block extrastyle %} 
+<link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+{% endblock %}

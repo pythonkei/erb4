@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "pages.apps.PagesConfig",
+    "pages.apps.PagesConfig", # this info python for inital class form apps.py
+    "listings.apps.ListingsConfig", # this info python for inital class form apps.py
+    "realtors.apps.RealtorsConfig", # this info python for inital class form apps.py
 ]
 
 MIDDLEWARE = [
@@ -77,10 +79,14 @@ WSGI_APPLICATION = 'bcre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# Project modify
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'bcredb',
+        'USER': 'postgres',
+        'PASSWORD': '111111',
+        'HOST':'localhost'
     }
 }
 
@@ -134,3 +140,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'bcre/static')]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Define Media Folder like as images upload folder (Project new added)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+

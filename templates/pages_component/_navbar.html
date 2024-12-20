@@ -16,17 +16,16 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <ul class="navbar-nav">
-              <li {% if '/' == request.path %} class="nav-item active mr-3" {% else %} class="nav-item mr-3" {% endif %} > <!-- Active page on function by use if/else/endif -->
-                {% comment %} fix index.html later {% endcomment %}
-                <a class="nav-link" href={% url "index" %}>Home</a> <!--This url function as endpoint defined by pages/urls.py  -->
+              <li {% if '/' == request.path %} class="nav-item active mr-3" {% else %} class="nav-item mr-3" {% endif %} >
+                <!-- Active page on function by use if/else/endif -->
+                <a class="nav-link" href={% url "index" %}>Home</a>
+                <!--This url function as endpoint defined by pages/urls.py  -->
               </li>
               <li {% if 'about' in request.path %} class="nav-item active mr-3" {% else %} class="nav-item mr-3" {% endif %} >
-                {% comment %} fix about.html later {% endcomment %}
                 <a class="nav-link" href={% url "about" %}>About</a>
               </li>
               <li {% if 'listings' in request.path %} class="nav-item active mr-3" {% else %} class="nav-item mr-3" {% endif %} >
-                {% comment %} fix listing.html later {% endcomment %}
-                <a class="nav-link" href={% url "listings" %}>Featured Listings</a>
+                <a class="nav-link" href={% url 'listings' %}>Featured Listings</a>
               </li>
             </ul>
 

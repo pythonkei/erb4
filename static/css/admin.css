@@ -1,0 +1,41 @@
+/* django CMS cascade css */
+/* Then, Run command: python manage.py collectstatic again for gen new admin.css */
+#header {
+    height: 80px;
+    background: #263d5f;
+
+    h1 {
+        color: white;
+    }
+}
+
+#branding h1 {
+    color: #fff;
+}
+
+a:link, a:visited {
+    color: #263d5f;
+}
+
+div.breadcrumbs {
+    background: #30caa0;
+    color: #263d5f;
+}
+
+div.breadcrumbs a {
+    color: #333;
+}
+
+.module h2, .module caption, .inlinegroup h2 {
+    background : #30caa0;
+}
+
+.button,
+input[type="Submit"],
+input[type="Button"],
+
+.submitrow_input,
+a.button {
+    background:#263d5f;
+    color: #ffffff;
+}

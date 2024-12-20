@@ -16,6 +16,8 @@ img {
 
 #showcase {
   background: url('/static/img/showcase.jpg') no-repeat top center/cover fixed; /* installed plugins: Image preview for make sure img preload */
+  /* Problem: More css level/folder. */
+  /* Sir help changed absolute path and rerun command: python manage.py collectstatic to update revised css file */
   position: relative;
   min-height: 650px;
   color: #fff;

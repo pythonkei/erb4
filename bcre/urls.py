@@ -19,14 +19,16 @@ Including another URLconf
 # then to pages/urls.py for sub routing and sub categorize (line 26)
 
 
-# Project demo added:
-from django.contrib import admin # Project demo new added:
-from django.urls import path,include # Project demo new added:
+# Initial variable and import:
+from django.contrib import admin # Project demo new added
+from django.urls import path,include # Project demo new added
+from django.conf.urls.static import static # Project demo new added
+from django.conf import settings # Project demo new added
 
 # Endpoint Define
 urlpatterns = [
    path('', include ('pages.urls')), # this line is project added
    # Serve end user 95% traffic first, '': Empty string for path categorize -> urls.py to pages folder
-   path('admin/', admin.site.urls) #  Path endpoint as 'admin/' this line is project added
-]
-
+   path('listings/', include ('listings.urls')), 
+   path('admin/', admin.site.urls), #  Path endpoint as 'admin/' this line is (Project new added)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Define path to store photo from dynamic to static, Variable from settings.py
