@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "pages.apps.PagesConfig", # this info python for inital class form apps.py
-    "listings.apps.ListingsConfig", # this info python for inital class form apps.py
-    "realtors.apps.RealtorsConfig", # this info python for inital class form apps.py
+    "django.contrib.humanize",
+    "debug_toolbar", # Install command python -m pip install django-debug-toolbar, here inital
+    "pages.apps.PagesConfig", # This info python for inital class form pages/apps.py
+    "listings.apps.ListingsConfig", # this info python for inital class form listings/apps.py
+    "realtors.apps.RealtorsConfig", # this info python for inital class form realtors/apps.py
+
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware" # debug toolbar
 ]
 
 ROOT_URLCONF = 'bcre.urls'
@@ -79,7 +83,7 @@ WSGI_APPLICATION = 'bcre.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# Project modify
+# Project modify SQL auto connect postgres
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -146,3 +150,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+INTERNAL_IPS =[
+   "127.0.0.1", 
+]

@@ -24,11 +24,12 @@ from django.contrib import admin # Project demo new added
 from django.urls import path,include # Project demo new added
 from django.conf.urls.static import static # Project demo new added
 from django.conf import settings # Project demo new added
+from debug_toolbar.toolbar import debug_toolbar_urls
 
 # Endpoint Define
 urlpatterns = [
    path('', include ('pages.urls')), # this line is project added
    # Serve end user 95% traffic first, '': Empty string for path categorize -> urls.py to pages folder
    path('listings/', include ('listings.urls')), 
-   path('admin/', admin.site.urls), #  Path endpoint as 'admin/' this line is (Project new added)
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Define path to store photo from dynamic to static, Variable from settings.py
+   path('admin/', admin.site.urls) #  Path endpoint as 'admin/' this line is (Project new added)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + debug_toolbar_urls() # Define path to store photo from dynamic to static, Variable from settings.py
