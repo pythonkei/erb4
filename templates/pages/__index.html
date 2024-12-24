@@ -1,11 +1,7 @@
-{% extends 'base.html'%}
+{% extends 'base.html' %}
 {% load static %}
-<!-- Project demo added: use by base.html master structure, css and js, This is first load into here -->
-<!-- Must be load here under extends base.html -->
 {% load humanize %}
 {% block content %}
-<!-- Self content input, this is list function form settings.py -->
-
     <!-- Showcase -->
     <section id="showcase">
         <div class="container text-center">
@@ -17,10 +13,10 @@
                 Recusandae quas, asperiores eveniet vel nostrum magnam voluptatum
                 tempore! Consectetur, id commodi!
               </p>
-
               <div class="search">
-                <form action={% url 'search' %}>
-                  <!-- Form Row 1 item 1: Keyword-->
+                {% comment %} correct later {% endcomment %}
+                <form action="search.html">
+                  <!-- Form Row 1 -->
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
                       <label class="sr-only">Keywords</label>
@@ -28,11 +24,10 @@
                         type="text"
                         name="keywords"
                         class="form-control"
-                        placeholder="Keyword (Bathrooms, ClubHouse, etc)"/>
+                        placeholder="Keyword (Bathrooms, ClubHouse, etc)"
+                      />
                     </div>
-
-
-                    <!-- Form Row 1 item 2: Street -->
+  
                     <div class="col-md-4 mb-3">
                       <label class="sr-only">street</label>
                       <input
@@ -42,50 +37,72 @@
                         placeholder="Street"
                       />
                     </div>
-
-                    <!-- Form Row 1 item 3: District -->
+  
                     <div class="col-md-4 mb-3">
                       <label class="sr-only">District</label>
                       <select name="district" class="form-control">
                         <option selected="true" disabled="disabled">
                           District (All)
                         </option>
-                        {% for key,value in district_choices.items %}
-                        <option value={{ key }} > {{ value }}</option>
-                        {% endfor %}
+                        <option value="IL">Islands</option>
+                        <option value="KT">Kwai Tsing</option>
+                        <option value="NR">North</option>
+                        <option value="SK">Sai Kung</option>
+                        <option value="ST">Sha Tin</option>
+                        <option value="TP">Tai Po</option>
+                        <option value="TW">Tsuen Wan</option>
+                        <option value="TM">Tuen Mun</option>
+                        <option value="YL">Yuen Long</option>
+                        <option value="KC">Kowloon City</option>
+                        <option value="KW">Kwun Tong</option>
+                        <option value="SS">Sham Shui Po</option>
+                        <option value="WT">Wong Tai Sin</option>
+                        <option value="YM">Yau Tsim Mong</option>
+                        <option value="CW">Central & Western</option>
+                        <option value="ER">Eastern</option>
+                        <option value="SR">Southern</option>
+                        <option value="WC">Wan Chai</option>
                       </select>
                     </div>
                   </div>
-
+                  <!-- Form Row 2 -->
                   <div class="form-row">
-
-                  <!-- Form Row 2 item 1: Bedroom -->
                     <div class="col-md-6 mb-3">
                       <label class="sr-only">Bedrooms</label>
                       <select name="bedrooms" class="form-control">
                         <option selected="true" disabled="disabled">
                           Bedrooms (All)
                         </option>
-                        {% for key,value in bedroom_choices.items %}
-                        <option value={{ key }} > {{ value }} </option>
-                        {% endfor %}
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
                       </select>
                     </div>
-
-                    <!-- Form Row 2 item 2: Price -->
                     <div class="col-md-6 mb-3">
                       <select name="price" class="form-control" id="type">
                         <option selected="true" disabled="disabled">
                           Max Price (Any)
                         </option>
-                        {% for key,value in price_choices.items %}
-                        <option value={{ key }} > {{ value }} </option>
-                        {% endfor %}
+                        <option value="1000000">$1,000,000</option>
+                        <option value="2000000">$2,000,000</option>
+                        <option value="3000000">$3,000,000</option>
+                        <option value="4000000">$4,000,000</option>
+                        <option value="5000000">$5,000,000</option>
+                        <option value="6000000">$6,000,000</option>
+                        <option value="7000000">$7,000,000</option>
+                        <option value="8000000">$8,000,000</option>
+                        <option value="9000000">$9,000,000</option>
+                        <option value="10000000">$10M+</option>
                       </select>
                     </div>
                   </div>
-
-
                   <button class="btn btn-secondary btn-block mt-4" type="submit">
                     Submit form
                   </button>
@@ -94,74 +111,79 @@
             </div>
           </div>
         </div>
-      </section>
-
+    </section>
 
     <!-- Listings -->
     <section id="listings" class="py-5">
-        <div class="container">
+      <div class="container">
           <h3 class="text-center mb-3">Latest Listings</h3>
           <div class="row">
-            <!-- Listing recent 3 record -->
-            {% if listings %} <!-- if statement where check mvp_realtors first -->
-            {% for listing in listings %} <!-- Find listing single record in listings -->
+            {% if listings %}
+            {% for listing in listings %}
             <div class="col-md-6 col-lg-4 mb-4">
               <div class="card listing-preview">
-                <img class="card-img-top" src={{ listing.photo_main.url }} alt="" />
+                <img
+                  class="card-img-top"
+                  src={{ listing.photo_main.url }}
+                  alt=""
+                />
                 <div class="card-img-overlay">
                   <h2>
-                    <span class="badge badge-secondary text-white" >${{ listing.price | intcomma }}</span>
+                    <span class="badge badge-secondary text-white"
+                      >${{ listing.price|intcomma }}</span
+                    >
                   </h2>
                 </div>
                 <div class="card-body">
                   <div class="listing-heading text-center">
-                    <h4 class="text-primary">{{ listing.district }}</h4>
+                    <h4 class="text-primary">{{ listing.title }}</h4>
                     <p>
-                      <i class="fas fa-map-marker text-secondary"></i> {{ listing.district }}
+                      <i class="fas fa-map-marker text-secondary"></i>{{ listing.district }}
                     </p>
                   </div>
                   <hr />
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-th-large"></i> {{ listing.sqft | intword }}
+                      <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft|intcomma}}
                     </div>
                     <div class="col-6">
-                      <i class="fas fa-dumbbell"></i> {{ listing.clubhouse }}
+                      <i class="fas fa-dumbbell"></i> ClubHouse: {{ listing.clubhouse}}
                     </div>
                   </div>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-bed"></i> {{ listing.bedrooms }}
+                      <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}
                     </div>
                     <div class="col-6">
-                      <i class="fas fa-bath"></i> {{ listing.bathrooms }}
+                      <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}
                     </div>
                   </div>
                   <hr />
                   <div class="row py-2 text-secondary">
-                    <div class="col-6"><i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                    <div class="col-6"><i class="fas fa-user"></i> {{ listing.realtor }} </div>
                   </div>
                   <div class="row text-secondary pb-2">
                     <div class="col-6">
-                      <i class="fas fa-clock"></i> {{ listing.list_date | timesince }}
+                      <i class="fas fa-clock"></i> {{ listing.list_date|timesince}}
                     </div>
                   </div>
                   <hr />
-                  <a href="{% url 'listing' listing.id %}"  class="btn btn-primary btn-block" >More Info</a>
+                  <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block"
+                    >More Info</a
+                  >
                 </div>
               </div>
             </div>
-            {% endfor %}
+            {% endfor%}
             {% else %}
-            <div class="col-md-12"><p> No Listing Available</p></div>
+            <div class="col-md-12">No Listing Available</div>
             {% endif %}
           </div>
-        </div>
-      </section>
+      </div>
+    </section>
 
-
-    <!-- Services -->
-      <section id="services" class="py-5 bg-secondary text-white">
+    <!-- Service -->
+    <section id="services" class="py-5 bg-secondary text-white">
         <div class="container">
           <div class="row text-center">
             <div class="col-md-4">
@@ -196,7 +218,5 @@
             </div>
           </div>
         </div>
-      </section>
-
-
+    </section>
 {% endblock %}
