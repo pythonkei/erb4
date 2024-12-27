@@ -58,7 +58,7 @@
                   <option selected="true" disabled="disabled">
                     Bedrooms (Any)
                   </option>
-                  {% for key,value in bedrooms_choices.items %}
+                  {% for key,value in bedroom_choices.items %}
                   <option value="{{ key }}"
                   {% if key == values.bedrooms %} selected {% endif %} > {{ value }} </option>
                   {% endfor %}
