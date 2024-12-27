@@ -1,5 +1,5 @@
 """
-WSGI config for bcre project.
+WSGI config for bcre project. ***This file for depoy entry
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

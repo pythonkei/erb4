@@ -19,7 +19,7 @@
               </p>
 
               <div class="search">
-                <form action={% url 'search' %}>
+                <form action={% url 'search' %} method="GET">
                   <!-- Form Row 1 item 1: Keyword-->
                   <div class="form-row">
                     <div class="col-md-4 mb-3">
@@ -28,18 +28,15 @@
                         type="text"
                         name="keywords"
                         class="form-control"
-                        placeholder="Keyword (Bathrooms, ClubHouse, etc)"/>
+                        placeholder="Keyword (Bathrooms, ClubHouse, etc)"
+                      />
                     </div>
 
 
-                    <!-- Form Row 1 item 2: Street -->
+                    <!-- Form Row 1 item 2: Title -->
                     <div class="col-md-4 mb-3">
-                      <label class="sr-only">street</label>
-                      <input
-                        type="text"
-                        name="street"
-                        class="form-control"
-                        placeholder="Street"
+                      <label class="sr-only">title</label>
+                      <input type="text" name="title" class="form-control" placeholder="Title"
                       />
                     </div>
 
@@ -115,9 +112,9 @@
                 </div>
                 <div class="card-body">
                   <div class="listing-heading text-center">
-                    <h4 class="text-primary">{{ listing.district }}</h4>
+                    <h4 class="text-primary">{{ listing.title | title }}</h4>
                     <p>
-                      <i class="fas fa-map-marker text-secondary"></i> {{ listing.district }}
+                      <i class="fas fa-map-marker text-secondary"></i> {{ listing.get_district_display }}
                     </p>
                   </div>
                   <hr />
@@ -147,7 +144,7 @@
                     </div>
                   </div>
                   <hr />
-                  <a href="{% url 'listing' listing.id %}"  class="btn btn-primary btn-block" >More Info</a>
+                  <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block" >More Info</a>
                 </div>
               </div>
             </div>

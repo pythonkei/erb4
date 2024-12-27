@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load humanize %}
 {% block content %}
 
@@ -7,7 +8,8 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
-          <form action="search.html">
+          {% comment %} update csrf later {% endcomment %}
+          <form action={% url 'search' %} method="GET">
             <!-- Form Row 1 -->
             <div class="form-row">
               <div class="col-md-4 mb-3">
@@ -17,16 +19,18 @@
                   name="keywords"
                   class="form-control"
                   placeholder="Keyword (Bathrooms, ClubHouse, etc)"
+                  value= "{{ values.keywords }}"
                 />
               </div>
 
               <div class="col-md-4 mb-3">
-                <label class="sr-only">City</label>
+                <label class="sr-only">Title</label>
                 <input
                   type="text"
-                  name="Street"
+                  name="title"
                   class="form-control"
-                  placeholder="Street"
+                  placeholder="Title"
+                  value= "{{ values.title }}"
                 />
               </div>
 
@@ -36,8 +40,10 @@
                   <option selected="true" disabled="disabled">
                     Districts (All)
                   </option>
-                  {% for key.value in district_choices.items %}
-                  <option value={{ key }} > {{ value }}</option>
+                  {% for key,value in district_choices.items %}
+                  <option value="{{ key }}"
+                  {% if key == values.district %} selected {% endif %} > {{ value }} </option>
+                  <!-- this value display in search bar base on models.py district_choices variable -->
                   {% endfor %}
                 </select>
               </div>
@@ -52,8 +58,9 @@
                   <option selected="true" disabled="disabled">
                     Bedrooms (Any)
                   </option>
-                  {% for key.value in bedroom_choices.items %}
-                  <option value={{ key }} > {{ value }}</option>
+                  {% for key,value in bedrooms_choices.items %}
+                  <option value="{{ key }}"
+                  {% if key == values.bedrooms %} selected {% endif %} > {{ value }} </option>
                   {% endfor %}
                 </select>
               </div>
@@ -64,8 +71,9 @@
                   <option selected="true" disabled="disabled">
                     Max Price (All)
                   </option>
-                  {% for key.value in price_choices.items %}
-                  <option value={{ key }} > {{ value }}</option>
+                  {% for key,value in price_choices.items %}
+                  <option value="{{ key }}"
+                  {% if key == values.price %} selected {% endif %} > {{ value }} </option>
                   {% endfor %}
                 </select>
               </div>
@@ -89,7 +97,7 @@
           <a href={% url 'index' %}> <i class="fas fa-home"></i> Home</a>
         </li>
         <li class="breadcrumb-item">
-          <a href={% url 'listing' %}>Browse Listings</a>
+          <a href={% url 'listings' %}>Browse Listings</a> <!-- refer to urls.py line view index code-->
         </li>
         <li class="breadcrumb-item active">Search Results</li>
       </ol>
@@ -103,67 +111,67 @@
     <div class="container">
     <div class="row">
 
-
-        <!-- Listing 1 -->
-        {% comment %} for {% endcomment %}
+        <!-- Listing record from database -->
+        {% if listings %}
+        {% for listing in listings %}
         <div class="col-md-6 col-lg-4 mb-4">
-        <div class="card listing-preview">
+          <div class="card listing-preview">
             <img
-            class="card-img-top"
-            src="assets/img/homes/home-1.jpg"
-            alt=""
+              class="card-img-top"
+              src="{{ listing.photo_main.url }}"
+              alt=""
             />
             <div class="card-img-overlay">
-            <h2>
-                <span class="badge badge-secondary text-white">$490,000</span>
-            </h2>
+              <h2>
+                <span class="badge badge-secondary text-white">${{ listing.price | intcomma }}</span>
+              </h2>
             </div>
             <div class="card-body">
-            <div class="listing-heading text-center">
-                <h4 class="text-primary">45 Prince Street</h4>
+              <div class="listing-heading text-center">
+                <h4 class="text-primary">{{ listing.title | title }}</h4>
                 <p>
-                <i class="fas fa-map-marker text-secondary"></i> Yau Tsim
-                Mong
+                  <i class="fas fa-map-marker text-secondary"></i>{{ listing.get_district_display }}
                 </p>
-            </div>
-            <hr />
-            <div class="row py-2 text-secondary">
+              </div>
+              <hr />
+              <div class="row py-2 text-secondary">
                 <div class="col-6">
-                <i class="fas fa-th-large"></i> Sqft: 3200
+                  <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft | intcomma }}
                 </div>
                 <div class="col-6">
-                <i class="fas fa-car"></i> ClubHouse: 2
+                  <i class="fas fa-car"></i> ClubHouse: {{ listing.clubhouse }}
                 </div>
-            </div>
-            <div class="row py-2 text-secondary">
+              </div>
+              <div class="row py-2 text-secondary">
                 <div class="col-6">
-                <i class="fas fa-bed"></i> Bedrooms: 3
+                  <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}
                 </div>
                 <div class="col-6">
-                <i class="fas fa-bath"></i> Bathrooms: 2
+                  <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}
                 </div>
-            </div>
-            <hr />
-            <div class="row py-2 text-secondary">
+              </div>
+              <hr />
+              <div class="row py-2 text-secondary">
                 <div class="col-12">
-                <i class="fas fa-user"></i> Kyle Chan
+                  <i class="fas fa-user"></i> {{ listing.realtor.name }}
                 </div>
-            </div>
-            <div class="row text-secondary pb-2">
+              </div>
+              <div class="row text-secondary pb-2">
                 <div class="col-6">
-                <i class="fas fa-clock"></i> 2 days ago
+                  <i class="fas fa-clock"></i>{{ listing.list_date | timesince }}
                 </div>
-            </div>
-            <hr />
-            <a href="listing.html" class="btn btn-primary btn-block"
+              </div>
+              <hr />
+              <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block" 
                 >More Info</a
-            >
+              ><!-- refer to urls.py line path int:listing_id code-->
             </div>
+          </div>
         </div>
-        </div>
-        {% comment %} endfor {% endcomment %}
-
-
+        {% endfor %}
+        {% else %}
+        <p>No Property Available.</p>
+        {% endif %}
     </div>
     </div>
 </section>

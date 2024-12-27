@@ -29,11 +29,44 @@ def listing(request, listing_id):
     context = {'listing' : listing } #Check record exsiting or not, if no record go to 404 page
     return render(request,'listings/listing.html', context)
 
+# Second filter function using queryset and which datatype set option
+# Search Logic: get keywords depend on user input, then build queryset to queryset_list variable in context,
+# then assign result to search.html and continuous to second search or filter by field button.
 
 def search(request):
+    queryset_list = Listing.objects.order_by('-list_date')
+
+    if 'keywords' in request.GET:
+        keywords = request.GET['keywords'] 
+        if keywords:
+            queryset_list = queryset_list.filter(description__icontains = keywords) 
+
+    if 'title' in request.GET:
+        title = request.GET['title']
+        if title:
+            queryset_list = queryset_list.filter(title__icontains = title)
+
+    if 'district' in request.GET:
+        district = request.GET['district']
+        if district:
+            if district != '_':
+                queryset_list = queryset_list.filter(district__iexact = district)
+
+    if 'bedrooms' in request.GET:
+        bedrooms = request.GET['bedrooms']
+        if bedrooms:
+            queryset_list = queryset_list.filter(bedrooms__lte = bedrooms) #lte as internal function mean lower than and equal to
+
+    if 'price' in request.GET:
+        price = request.GET['price']
+        if price:
+            queryset_list = queryset_list.filter(price__lte = price)
+
     context = {
         'price_choices':price_choices,
         'bedroom_choices':bedroom_choices,
         'district_choices':district_choices,
+        'listings':queryset_list,
+        'values' : request.GET, # request.GET as variable: values for index search function call
     }
-    return render(request,'listings/search.html', context)
+    return render(request,'listings/search.html',context)
