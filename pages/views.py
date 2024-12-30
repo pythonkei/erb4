@@ -23,11 +23,3 @@ def about(request):
         'mvp_realtors' : mvp_realtors
     }
     return render(request,'pages/about.html', context) # put context variable into about.html
-
-# def search(request):
-#     context = {
-#         'price_choices':price_choices,
-#         'bedroom_choices':bedroom_choices,
-#         'district_choices':district_choices,
-#     }
-#     return render(request,'listings/search.html', context)

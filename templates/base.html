@@ -1,6 +1,8 @@
-<!--This is project demo new added as Master structure html-->
+<!--This is project demo new added as Master structure html
+with 3 section refer to page component sources -->
 {% load static %}
-<!-- Load function static variable form settings.py, MUST be load into this html for call css and js -->
+<!-- Load function static variable form settings.py,
+ MUST be load into this html for call css and js -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,15 +29,18 @@
   </head>
 
 
-  <body> <!-- Html structure for content html -->
+  <body> 
+  <!-- Master html structure for page component folder content html -->
+
     {% include 'pages_component/_topbar.html'%}
     <!-- Specific topbar use for content html embed -->
 
     {% include 'pages_component/_navbar.html'%}
     <!-- Specific navbar use for content html embed -->
 
-    {% block content %} <!-- html content input -->{% endblock %}
+    {% block content %} <!-- html actually content input -->
     <!-- Specific Master structure function for content html, use extends base html file call function -->
+    {% endblock %}
 
     {% include 'pages_component/_footer.html'%}
     <!-- Specific footer use for content html embed -->

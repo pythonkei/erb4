@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 # Project new added
 import os
-
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent 
@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# This section Must be initial when install new app when run terminal install manage.py command
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,9 +45,10 @@ INSTALLED_APPS = [
     "pages.apps.PagesConfig", # This info python for inital class form pages/apps.py
     "listings.apps.ListingsConfig", # this info python for inital class form listings/apps.py
     "realtors.apps.RealtorsConfig", # this info python for inital class form realtors/apps.py
-
+    'accounts.apps.AccountsConfig',
 ]
 
+# This section seem like plugin function
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware" # debug toolbar
+    "debug_toolbar.middleware.DebugToolbarMiddleware", # debug right side browser bar
 ]
 
 ROOT_URLCONF = 'bcre.urls'
@@ -64,7 +65,8 @@ ROOT_URLCONF = 'bcre.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates')], # Base directory specific to templates folder
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
+        # BASE_DIR directory is specific to templates folder and cascade on top to upline 'BACKEND': django.template
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -151,5 +153,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 INTERNAL_IPS =[
-   "127.0.0.1", 
+   "127.0.0.1",
 ]
+
+# Bootstrap message color indicator
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger',
+    messages.SUCCESS: 'success',
+}

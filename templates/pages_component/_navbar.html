@@ -30,19 +30,43 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item mr-3">
-                {% comment %} fix register.html later {% endcomment %}
-                <a class="nav-link" href="register.html">
-                  <i class="fas fa-user-plus"></i> Register
+              {% if user.is_authenticated %}
+                <li {% if 'dashboard' in request.path %} class="nav-item mr-3 active">
+              {% else %}
+                <li class="nav-item mr-3">
+              {% endif %}
+                <a class="nav-link" href={% url 'dashboard' %}>Welcome {{user.username}} (dashboard)
                 </a>
               </li>
               <li class="nav-item mr-3">
-                {% comment %} fix login.html later {% endcomment %}
-                <a class="nav-link" href="login.html">
+                <a class="nav-link" href={% url 'logout' %}>
+                  <i class="fas fa-sign-in-alt"></i> Logout
+                </a>
+              </li>
+              {% else %}
+
+              {% if 'register' in request.path %}
+              <li class="nav-item mr-3 active">
+              {% else %}
+                <li class="nav-item mr-3">
+              {% endif %}
+                <a class="nav-link" href={% url 'register' %}>
+                  <i class="fas fa-user-plus"></i> Register
+                </a>
+              </li>
+              
+              <li class="nav-item mr-3">
+                {% if 'register' in request.path %}
+                  <li class="nav-item mr-3 active">
+                {% else %}
+                  <li class="nav-item mr-3">
+                {% endif %}
+                <a class="nav-link" href={% url 'login' %}>
                   <i class="fas fa-sign-in-alt"></i>Login
                 </a>
               </li>
             </ul>
+            {% endif %}
           </div>
         </div>
       </nav>

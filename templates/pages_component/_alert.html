@@ -1,0 +1,28 @@
+{% if messages %} 
+{% for messages in messages %}
+<div class='container' id='messages'>
+    <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role = 'alert'>
+        <button class='close' type='button' data-dismiss='alert'>
+            <span aria-hidden='true'>&times;</span> <!-- &times; is code for close button -->
+        </button>
+        <strong>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            Error : {% else %} {{ message.tags | title }}
+            {% endif %}
+        </strong>
+        {{ message }}
+    </div>
+<div>
+{% endfor %}
+
+{% endif %}
+
+
+<!-- Exam Q - 30 Dec AM procedure -->
+<!--
+1. Run terminal command to Install account app
+2. Config bcre/setting.py : 'accounts.apps.AccountsConfig'
+3. Creating 3 html : dashboard.html, login.html, register.html in accounts folder(this folder auto gen after install app)
+4. Creating _alert.html in component folder
+5. Config _alert.html message use bootstrap html tag to create error layout message and button
+-->

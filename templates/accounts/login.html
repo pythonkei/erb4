@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- Login -->
+<section id="login" class="bg-light py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4><i class="fas fa-sign-in-alt"></i> Login</h4>
+          </div>
+          <div class="card-body">
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="password2">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <input
+                type="submit"
+                value="Login"
+                class="btn btn-secondary btn-block"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}
+
+
+<!--
+Register / Login action use method POST,
+If success login, then give unique csrf token with time range for ex.1 hour, 
+
+CRUD main function , bz CUD is database in/out right, expect Read function
+-->
+
+
+
+<ul class="navbar-nav ml-auto">
+    {% if user.is_authenticated %}
+    <li {% if 'dashboard' in request.path %} class="nav-item mr-3 active">
+    {% else %}
+      <li class="nav-item mr-3">
+    {% endif %}
+      <a class="nav-link" href={% url 'dashboard' %}>Welcome {{user.username}} (dashboard)
+      </a>
+    </li>
+    <li class="nav-item mr-3">
+      <a class="nav-link" href={% url 'logout' %}>
+        <i class="fas fa-sign-in-alt"></i> Logout
+      </a>
+    </li>
+    {% else %}
+  </ul>
+  {% endif %}
