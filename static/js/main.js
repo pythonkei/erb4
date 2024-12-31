@@ -2,7 +2,7 @@ const date = new Date();
 document.querySelector('.year').innerHTML = date.getFullYear();
 
 setTimeout(()=>{
-    $("#message").fadeOut("slow");
+    $("#messages").fadeOut("slow");
 },3000);
 
 

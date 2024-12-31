@@ -162,3 +162,9 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
     messages.SUCCESS: 'success',
 }
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 578
+EMAIL_HOST_USER = 'pythonkei@gmail.com'
+EMAIL_HOST_PASSWORD = 'Password~123@'
+EMAIL_USE_TLS = True

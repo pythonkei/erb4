@@ -13,10 +13,13 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
           <li {% if '/' == request.path %} class="nav-item active mr-3" {% else%} class="nav-item mr-3" {% endif%}>
+            <!-- Active page on function by use if/else/endif -->
             <a class="nav-link" href={% url 'index' %}>Home</a>
+            <!--This url function as endpoint defined by pages/urls.py  -->
           </li>
           <li {% if 'about' in request.path %} class="nav-item active mr-3" {% else%} class="nav-item mr-3" {% endif%}>
             <a class="nav-link" href={% url 'about' %}>About</a>
@@ -26,16 +29,16 @@
           </li>
         </ul>
 
+        <!-- Login / out function-->
         <ul class="navbar-nav ml-auto">
           {% if user.is_authenticated %}
-
           <li {% if 'dashboard' in request.path %} class="nav-item active mr-3" {% else %} class="nav-item mr-3" {% endif %}>
             <a class="nav-link" href="{% url 'dashboard' %}">
-              <i class="fas fa-user"></i>Welcome {{ user.username }}(dashboard)</a
+              <i class="fas fa-user"></i> Welcome {{ user.username }}</a
             >
           </li>
 
-          <!-- Logout function-->
+          <!-- Logout -->
           <li class="nav-item mr-3">
             <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">
               <!-- this line mean using js submit button give below form

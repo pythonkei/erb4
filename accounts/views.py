@@ -1,7 +1,10 @@
+# ******view.py in python major function as get data, template display(html) and use for loop wait users request
 from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from contacts.models import Contact
 # from django that mean library, import is shortcut or label name
+
 
 
 #  Find register.html label id for user auth register function, 1 - 6 line is match register.html label
@@ -36,24 +39,23 @@ def register(request):
 
 # Put 2 field to auth function validate
 def login(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        user = auth.authenticate(username = username, password = password)
+        user = auth.authenticate(username=username,password=password)
         if user is not None:
-            auth.login(request, user)
-            messages.success(request, 'You are now logged in')
+            auth.login(request,user)
+            messages.success(request,'You have logged in')
             return redirect('dashboard')
         else:
-            messages.error(request, 'Invalid credentials')
-            return redirect('login')
-    else :
+            messages.error(request,"Invalid Credentials")
+            return redirect("login")
+    else:
         return render(request,'accounts/login.html')
     
 
 # Register / Login action use method POST,
 # If success login, then give unique csrf token with time range for ex.1 hour, 
-
 # CRUD main function , bz CUD is database in/out major right, expect Read function
 
 
@@ -65,4 +67,8 @@ def logout(request):
 
 
 def dashboard(request):
-    return render(request,'accounts/dashboard.html')
+    user_contacts = Contact.objects.order_by("-contact_date").filter(user_id=request.user.id)
+    context = {
+        'contacts':user_contacts
+    }
+    return render(request,'accounts/dashboard.html',context)
