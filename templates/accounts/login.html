@@ -58,20 +58,3 @@ CRUD main function , bz CUD is database in/out right, expect Read function
 
 
 
-<ul class="navbar-nav ml-auto">
-    {% if user.is_authenticated %}
-    <li {% if 'dashboard' in request.path %} class="nav-item mr-3 active">
-    {% else %}
-      <li class="nav-item mr-3">
-    {% endif %}
-      <a class="nav-link" href={% url 'dashboard' %}>Welcome {{user.username}} (dashboard)
-      </a>
-    </li>
-    <li class="nav-item mr-3">
-      <a class="nav-link" href={% url 'logout' %}>
-        <i class="fas fa-sign-in-alt"></i> Logout
-      </a>
-    </li>
-    {% else %}
-  </ul>
-  {% endif %}

@@ -3,8 +3,10 @@
 <!-- Project demo added: use by base.html master structure, css and js, This is first load into here -->
 <!-- Must be load here under extends base.html -->
 {% load humanize %}
+{% block title %} Welcome {% endblock %}
 {% block content %}
 <!-- Self content input, this is list function form settings.py -->
+{% include "pages_component/_alert.html" %}
 
     <!-- Showcase -->
     <section id="showcase">

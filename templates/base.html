@@ -25,7 +25,9 @@ with 3 section refer to page component sources -->
     <!-- Lightbox -->
     <link rel="stylesheet" href={% static "css/lightbox.min.css" %}/>
 
-    <title>BC Real Estate</title>
+    <link rel="icon" sizes="16x16" href={% static 'img/logo.png' %} />
+
+    <title>BC Real Estate {% block title %}{% endblock title %}</title>
   </head>
 
 

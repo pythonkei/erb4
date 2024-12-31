@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "listings.apps.ListingsConfig", # this info python for inital class form listings/apps.py
     "realtors.apps.RealtorsConfig", # this info python for inital class form realtors/apps.py
     'accounts.apps.AccountsConfig',
+    'contacts.apps.ContactsConfig',
 ]
 
 # This section seem like plugin function

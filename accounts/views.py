@@ -34,7 +34,7 @@ def register(request):
     else:
         return render(request,'accounts/register.html')
 
-# Put 2 field to auth function vaildate
+# Put 2 field to auth function validate
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -57,11 +57,12 @@ def login(request):
 # CRUD main function , bz CUD is database in/out major right, expect Read function
 
 
-
-
-
 def logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, 'You are now logged out!')
     return redirect('index')
+
 
 def dashboard(request):
     return render(request,'accounts/dashboard.html')

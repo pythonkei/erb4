@@ -1,21 +1,22 @@
-{% if messages %} 
-{% for messages in messages %}
-<div class='container' id='messages'>
-    <div class="alert alert-{{ message.tags }} alert-dismissible text-center" role = 'alert'>
-        <button class='close' type='button' data-dismiss='alert'>
-            <span aria-hidden='true'>&times;</span> <!-- &times; is code for close button -->
-        </button>
-        <strong>
-            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-            Error : {% else %} {{ message.tags | title }}
-            {% endif %}
-        </strong>
-        {{ message }}
-    </div>
-<div>
-{% endfor %}
+{% if messages %} {% for message in messages %}
+<div class="container" id="message">
+  <div
+    class="alert alert-{{ message.tags }} alert-dismissible text-center"
+    role="alert"
+  >
+    <button class="close" type="button" data-dismiss="alert">
+      <span aria-hidden="true"> &times; </span>
+    </button>
+    
+    <strong>
+      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %} Error: {% else %}
+      {{ message.tags|title }} {% endif %}
+    </strong>
+    {{ message }}
+  </div>
+</div>
+{% endfor %} {% endif %}
 
-{% endif %}
 
 
 <!-- Exam Q - 30 Dec AM procedure -->

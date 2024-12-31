@@ -27,10 +27,11 @@ from django.conf import settings # Project demo new added
 from debug_toolbar.toolbar import debug_toolbar_urls
 
 
-# Endpoint Define
+# Endpoint Define and traffic heavy ratio
 urlpatterns = [
    path('', include ('pages.urls')), # this line is project added
    path('listings/', include ('listings.urls')),
+   path('contacts/', include ('contacts.urls')),
    path('accounts/', include ('accounts.urls')),
    # Serve end user 95% traffic first, '': Empty string for path categorize -> urls.py to pages folder
    path('admin/', admin.site.urls) #  Path endpoint as 'admin/' this line is (Project new added)
